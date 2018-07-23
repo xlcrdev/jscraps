@@ -1,0 +1,159 @@
+<!-- craps.htm -->
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<title>Welcome to My Online Craps Game!</title>
+</head>
+
+<body background="table2.gif" bgcolor="#008000" onload="init();">
+<script language="JavaScript"><!--
+//Hide from non-JavaScript browsers
+
+function init()
+{
+	gameon=false;
+	games=0;
+	wins=0;
+	losses=0;
+	document.forms[1].gameno.value=games;
+	document.forms[1].wins.value=wins;
+	document.forms[1].losses.value=losses;
+}
+
+function displayDie(die1,die2)
+{
+	filename1="die/"+die1+".gif";
+	filename2="die/"+die2+".gif";
+	document.images[6].src=filename1;
+	document.images[7].src=filename2;
+}
+
+function randomDice()
+{
+	die=Math.round(Math.random()*(5))+1;
+	return(die);
+}
+
+function startGame()
+{
+			gameon=true;
+			games++;
+			document.forms[1].gameno.value=eval(games);
+	
+			die1=randomDice();
+			die2=randomDice();
+
+			displayDie(die1,die2);
+
+			point = die1 + die2;
+
+			if(point == 2){
+				gameon=false;
+				loseGame();}
+			if(point == 3){
+				gameon=false;
+				loseGame();}
+			if(point == 12){
+				gameon=false;
+				loseGame();}
+			if(point == 7){
+				gameon=false;
+				winGame(1);}
+			if(point == 11){
+				gameon=false;
+				winGame(1);}
+			if(gameon == true)
+				document.forms[0].message.value="Your Point is:  "+point+" - Roll Again";
+}
+
+function continueGame(point)
+{
+			die1=randomDice();
+			die2=randomDice();
+
+			displayDie(die1,die2);
+	
+			check = die1 + die2;
+	
+			if(check == point)
+				winGame();
+			if(check == 7)
+				loseGame();
+}
+
+function loseGame()
+{
+	losses++;
+	document.forms[1].losses.value=losses;
+	document.forms[0].message.value="Sorry You Lose - Press New Game to Play Again";
+}
+
+function winGame()
+{
+	wins++;
+	document.forms[1].wins.value=wins;
+	document.forms[0].message.value="Congratulations, you are a winner! - Press New Game";
+}
+
+// --></script>
+
+<CENTER>
+<TABLE BORDER="2" cellpadding="0" cellspacing"0" BGCOLOR="#008000">
+<TR>
+<TD><IMG SRC="die\1.gif">
+<TD><IMG SRC="die\2.gif">
+<TD><IMG SRC="die\3.gif">
+<TD><IMG SRC="die\4.gif">
+<TD><IMG SRC="die\5.gif">
+<TD><IMG SRC="die\6.gif">
+</TR>
+<TABLE>
+<font size="+2">JAVASCRIPT CRAPS</font>
+<table border="2" width="614px" bgcolor="#008000">
+    <tr>
+        <td align="center"><form>
+            <p align="center"><input type="button" name="message"
+            value="Welcome to Craps - Press New Game to Begin!"><br>
+            <input type="button" name="Start Game"
+            value="New Game" onclick="startGame();"> <input
+            type="button" name="Roll" value="Roll the Dice!"
+            onclick="continueGame(point);"></p>
+        </form>
+        <form>
+            <div align="center"><center><table border="2"
+            cellpadding="2" width="40%" bgcolor="#000000"
+            bordercolor="#000000" bordercolordark="#000000"
+            bordercolorlight="#000000">
+                <tr>
+                    <td bgcolor="#008000" nowrap>Game Number</td>
+                    <td align="center" bgcolor="#008000"><input
+                    type="text" size="5" name="gameno" type"text"></td>
+                    <td bgcolor="#008000" nowrap>Games Won</td>
+                    <td align="center" bgcolor="#008000"><input
+                    type="text" size="5" name="wins" type"text"></td>
+                    <td bgcolor="#008000" nowrap>Games Lost</td>
+                    <td align="center" bgcolor="#008000"><input
+                    type="text" size="5" name="losses" type"text"></td>
+                </tr>
+            </table>
+            </center></div>
+        </form>
+        <div align="center"><center><table border="3"
+        cellpadding="2" width="200" bgcolor="#008000"
+        bordercolor="#008000" bordercolordark="#008000"
+        bordercolorlight="#008000">
+            <tr>
+                <td align="center"><img src="die/good.gif"
+                align="absmiddle" width="100" height="100"> </td>
+                <td align="center"><img src="die/luck.gif"
+                align="absmiddle" width="100" height="100"></td>
+            </tr>
+        </table>
+        </center></div></td>
+    </tr>
+</table>
+</center></div>
+</CENTER>
+</body>
+</html>
